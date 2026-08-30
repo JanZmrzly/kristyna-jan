@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan &amp; Kristýna — 14. srpna 2027</title>
+<meta name="description" content="Odpočet do svatby Jana a Kristýny, 14. srpna 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0d1220;
+    --ink-2: #141b2e;
+    --gold: #c9a768;
+    --gold-soft: #e3cd9c;
+    --rose: #cf9484;
+    --cream: #f3ede1;
+    --muted: #8b93a8;
+    --hair: rgba(201,167,104,0.22);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    height:100%;
+    background: var(--ink);
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Jost', sans-serif;
+    color: var(--cream);
+    overflow:hidden;
+    position:relative;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(201,167,104,0.10), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(207,148,132,0.06), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+  }
+
+  /* drifting light — pure CSS, paused under reduced motion */
+  .motes{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+  .mote{
+    position:absolute;
+    bottom:-10px;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background: var(--gold-soft);
+    opacity:0;
+    animation: drift 14s linear infinite;
+    box-shadow: 0 0 6px 1px rgba(227,205,156,0.5);
+  }
+  @keyframes drift{
+    0%   { transform: translateY(0) translateX(0);   opacity:0; }
+    8%   { opacity:.55; }
+    92%  { opacity:.35; }
+    100% { transform: translateY(-105vh) translateX(var(--drift-x, 20px)); opacity:0; }
+  }
+
+  .stage{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:640px;
+    padding: 48px 28px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    letter-spacing: 0.42em;
+    text-transform:uppercase;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+
+  .names{
+    font-family:'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 8vw, 4.6rem);
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: 0.01em;
+    color: var(--cream);
+  }
+  .names .amp{
+    display:inline-block;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+    margin: 0 0.18em;
+    font-size: 0.8em;
+    transform: translateY(-0.05em);
+  }
+
+  .date-line{
+    margin: 18px 0 46px;
+    font-family:'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  .divider{
+    width: 64px;
+    height: 1px;
+    margin: 0 auto 46px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap: clamp(10px, 3vw, 26px);
+    margin-bottom: 40px;
+  }
+
+  .unit{
+    min-width: 64px;
+  }
+
+  .unit .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 6vw, 3.1rem);
+    color: var(--cream);
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .unit .label{
+    margin-top: 10px;
+    font-family:'Jost', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .sep{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: var(--hair);
+    align-self: flex-start;
+    padding-top: 2px;
+  }
+
+  .message{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .arrived{
+    display:none;
+  }
+  .arrived.show{
+    display:block;
+  }
+  .arrived .names{
+    margin-bottom: 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .mote{ animation: none; display:none; }
+  }
+
+  @media (max-width: 380px){
+    .countdown{ gap: 8px; }
+    .unit{ min-width: 52px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="motes" id="motes" aria-hidden="true"></div>
+
+  <main class="stage">
+    <p class="eyebrow">Bereme se</p>
+
+    <h1 class="names">Jan<span class="amp">&amp;</span>Kristýna</h1>
+
+    <p class="date-line">14. srpna 2027</p>
+
+    <div class="divider"></div>
+
+    <div id="countdownView">
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="unit"><div class="num" id="days">00</div><div class="label">dní</div></div>
+        <div class="sep">:</div>
+        <div class="unit"><div class="num" id="hours">00</div><div class="label">hodin</div></div>
+        <div class="sep">:</div>
+        <div class="unit"><div class="num" id="minutes">00</div><div class="label">minut</div></div>
+        <div class="sep">:</div>
+        <div class="unit"><div class="num" id="seconds">00</div><div class="label">sekund</div></div>
+      </div>
+      <p class="message">…do dne, na který se moc těšíme. Budeme rádi, když si tenhle okamžik odpočítáte s námi.</p>
+    </div>
+
+    <div class="arrived" id="arrivedView">
+      <h2 class="names" style="font-size: clamp(1.8rem, 5vw, 2.6rem);">Dnes je ten den!</h2>
+      <p class="message">Jan &amp; Kristýna se dnes berou. Děkujeme, že jste s námi.</p>
+    </div>
+  </main>
+
+<script>
+  // ---- Wedding date ----
+  // Předpoklad: obřad v 14:00. Pokud máš přesný čas, uprav řádek níže.
+  const WEDDING_DATE = new Date('2027-08-14T14:00:00+02:00');
+
+  const els = {
+    days: document.getElementById('days'),
+    hours: document.getElementById('hours'),
+    minutes: document.getElementById('minutes'),
+    seconds: document.getElementById('seconds'),
+    countdownView: document.getElementById('countdownView'),
+    arrivedView: document.getElementById('arrivedView'),
+  };
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+
+  function tick(){
+    const now = new Date();
+    const diff = WEDDING_DATE - now;
+
+    if (diff <= 0){
+      els.countdownView.style.display = 'none';
+      els.arrivedView.classList.add('show');
+      clearInterval(timer);
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    els.days.textContent = pad(d);
+    els.hours.textContent = pad(h);
+    els.minutes.textContent = pad(m);
+    els.seconds.textContent = pad(s);
+  }
+
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  // ---- Ambient drifting light motes ----
+  (function initMotes(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const container = document.getElementById('motes');
+    const COUNT = 18;
+    for (let i = 0; i < COUNT; i++){
+      const m = document.createElement('div');
+      m.className = 'mote';
+      const left = Math.random() * 100;
+      const delay = Math.random() * 14;
+      const duration = 11 + Math.random() * 8;
+      const driftX = (Math.random() * 60 - 30) + 'px';
+      m.style.left = left + 'vw';
+      m.style.animationDelay = delay + 's';
+      m.style.animationDuration = duration + 's';
+      m.style.setProperty('--drift-x', driftX);
+      container.appendChild(m);
+    }
+  })();
+</script>
+</body>
+</html>
